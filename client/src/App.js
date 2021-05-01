@@ -1,23 +1,21 @@
 import React from 'react';
-import { Viewer, GeoJsonDataSource } from 'resium';
+import { Viewer, CzmlDataSource } from 'resium';
+import czml from 'czml-writer';
 
 const App = () => {
-  const data = {
-    type: 'Feature',
-    properties: {
-      name: 'Lincoln Heights',
-      'building type': 'Apartment Complex',
-      message: 'I live here!',
-    },
-    geometry: {
-      type: 'Point',
-      coordinates: [-95.38015, 29.80434],
-    },
-  };
+  const orbit = new czml.orbit.fromParams({
+    apogee: 426.9, // km
+    perigee: 416.2, // km
+    inclination: 51.65, // deg
+    rightAscension: 304.1, // deg
+    argumentOfPeriapsis: 117.8, // deg
+  });
+  const output = orbit.czml();
+  console.log(output);
 
   return (
-    <Viewer full>
-      <GeoJsonDataSource data={data} />
+    <Viewer shouldAnimate full>
+      <CzmlDataSource data={output} />
     </Viewer>
   );
 };
