@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import { Ion } from 'cesium';
+Ion.defaultAccessToken = process.env.REACT_APP_CESIUM_TOKEN;
 
 ReactDOM.render(
   <React.StrictMode>
